@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package voicedock.extensions.aichat.v1;
+
+option csharp_namespace = "Voicedock.Extensions.Aichat.V1";
+option go_package = "voicedock/extensions/aichat/v1;aichatv1";
+option java_multiple_files = true;
+option java_outer_classname = "AichatApiProto";
+option java_package = "com.voicedock.extensions.aichat.v1";
+option objc_class_prefix = "VEA";
+option php_namespace = "Voicedock\\Extensions\\Aichat\\V1";
+
+import "voicedock/extensions/aichat/v1/aichat.proto";
+
+// Speech-to-text service.
+service AichatAPI {
+  // Generate response text by prompt.
+  rpc Generate(GenerateRequest) returns (stream GenerateResponse);
+  // Returns available ai chat models.
+  rpc GetModels(GetModelsRequest) returns (GetModelsResponse);
+  // Downloads selected ai model.
+  rpc DownloadModel(DownloadModelRequest) returns (DownloadModelResponse);
+}
+
+message GenerateRequest {
+  // Text prompt
+  string prompt = 1;
+}
+
+message GenerateResponse {
+  // Text token
+  string token_text = 1;
+}
+
+message GetModelsRequest { }
+
+message GetModelsResponse {
+  repeated Model models = 1;
+}
+
+message DownloadModelRequest {
+  // Model name.
+  string name = 1;
+}
+
+message DownloadModelResponse { }
