@@ -1,0 +1,8 @@
+version: v1
+managed:
+  enabled: true
+plugins:
+  - name: doc
+    opt:
+      - markdown,README.md,source_relative
+    out: docs
