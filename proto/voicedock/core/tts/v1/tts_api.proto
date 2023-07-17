@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package voicedock.core.tts.v1;
+
+option csharp_namespace = "Voicedock.Core.Tts.V1";
+option go_package = "voicedock/core/tts/v1;ttsv1";
+option java_multiple_files = true;
+option java_outer_classname = "TtsApiProto";
+option java_package = "com.voicedock.core.tts.v1";
+option objc_class_prefix = "VCT";
+option php_namespace = "Voicedock\\Core\\Tts\\V1";
+
+import "voicedock/core/tts/v1/tts.proto";
+import "voicedock/core/common/v1/audio.proto";
+
+// Text-to-speech service.
+service TtsAPI {
+  // Converts text to speech.
+  rpc TextToSpeech(TextToSpeechRequest) returns (stream TextToSpeechResponse);
+  // Returns available voices.
+  rpc GetVoices(GetVoicesRequest) returns (GetVoicesResponse);
+  // Downloads selected voice.
+  rpc DownloadVoice(DownloadVoiceRequest) returns (DownloadVoiceResponse);
+}
+
+message TextToSpeechRequest {
+  // Text phrase to be voiced
+  string text = 1;
+  // Language.
+  string lang = 2;
+  // Speaker.
+  string speaker = 3;
+}
+
+message TextToSpeechResponse {
+  // Audio stream
+  voicedock.core.common.v1.AudioContainer audio = 1;
+}
+
+message GetVoicesRequest { }
+
+message GetVoicesResponse {
+  repeated Voice voices = 1;
+}
+
+message DownloadVoiceRequest {
+  // Language.
+  string lang = 1;
+  // Speaker.
+  string speaker = 2;
+}
+
+message DownloadVoiceResponse { }
