@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package voicedock.core.sp.v1;
+
+option csharp_namespace = "Voicedock.Core.Sp.V1";
+option go_package = "voicedock/core/sp/v1;spv1";
+option java_multiple_files = true;
+option java_outer_classname = "SpApiProto";
+option java_package = "com.voicedock.core.sp.v1";
+option objc_class_prefix = "SP";
+option php_namespace = "Voicedock\\Core\\Sp\\V1";
+
+import "voicedock/core/common/v1/audio.proto";
+
+// Sound processing service.
+service SpAPI {
+  // Processes sound.
+  rpc ProcessSound(stream ProcessSoundRequest) returns (stream ProcessSoundResponse);
+}
+
+message ProcessSoundRequest {
+  // Audio stream
+  voicedock.core.common.v1.AudioContainer audio = 1;
+}
+
+message ProcessSoundResponse {
+  // Audio stream
+  voicedock.core.common.v1.AudioContainer audio = 1;
+}
